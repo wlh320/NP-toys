@@ -15,12 +15,14 @@ I refactor the code and add features I want based on the assignments provided by
 - can handle very simple HTTP request and send response.
 - status code: 200, 400, 404 / method: GET are supported.
 - very naive. Single-threaded, synchronous.
-- Been tested on Firefox/Chrome.
+- been tested on Firefox/Chrome.
 - A toy for learning. Might be improved in the future.
 
 ### UDP ping program
 
-TODO
+- a simple ping server/client using UDP sockets
+- determine round-trip time for each packet
+- calculate packet loss rate
 
 ### toy e-mail client
 
