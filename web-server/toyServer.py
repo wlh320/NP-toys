@@ -5,8 +5,10 @@ too simple, too naive
 import socket
 import logging
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s-%(levelname)s-%(module)s: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+LOGGER = logging.getLogger()
+LOGGER.setLevel(logging.INFO)
 
 # config - not finished
 ROOT = './test'
@@ -60,7 +62,7 @@ class ToyHttpResponse:
     def __init__(self):
         self.status = 'HTTP/1.1 %s %s'
         self.header = {'Server': 'ToyHttpServer'}
-        self.content = ''
+        self.content = b''
         self.raw = ''
         self.code = 200
 
@@ -79,6 +81,7 @@ class ToyHttpResponse:
         for k, v in self.header.items():
             self.raw += '%s:%s\r\n' % (k, v)
         self.raw += '\r\n'
+        self.raw = self.raw.encode()
         self.raw += self.content
 
     def handle(self, req):
@@ -92,7 +95,7 @@ class ToyHttpResponse:
                 req.path = '/index.html'
             filename = ROOT + req.path.split('?')[0]
             suf = filename.split('.')[-1]
-            fd = open(filename, 'r')
+            fd = open(filename, 'rb')
             self.content = fd.read()
             self.set_header('Content-type', self.MIME_TYPE[suf])
             self.pack()
@@ -117,7 +120,7 @@ class ToyHttpServer:
             logging.error(e)
 
     def serve_forever(self):
-        logging.info("Ready to serve...")
+        logging.info("Serving on {}:{}".format(self._host, self._port))
         while True:
             conn, addr = self._soc.accept()
             try:
@@ -125,12 +128,12 @@ class ToyHttpServer:
                 req = ToyHttpRequest(raw=message)
                 res = ToyHttpResponse()
                 res.handle(req)
-                conn.sendall(res.raw.encode())
+                conn.sendall(res.raw)
                 logging.info('%s -- "%s" - %s', addr[0], req.status, res.code)
             except IOError:
                 res = ToyHttpResponse()
                 res.set_error(400)
-                conn.sendall(res.raw.encode())
+                conn.sendall(res.raw)
                 logging.warn('%s -- "%s" - %s', addr[0], req.status, res.code)
             finally:
                 conn.close()
