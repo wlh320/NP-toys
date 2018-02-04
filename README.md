@@ -26,7 +26,9 @@ I refactor the code and add features I want based on the assignments provided by
 
 ### toy e-mail client
 
-TODO
+- a simple SMTP client that can send plain text.
+- in other words, a clumsy implementation of reduced `smtplib`.
+- just plain ascii, not support utf8/html/attach yet. May be improved someday.
 
 ### toy Web proxy server
 
