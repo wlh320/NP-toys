@@ -32,7 +32,10 @@ I refactor the code and add features I want based on the assignments provided by
 
 ### toy Web proxy server
 
-TODO
+- a simple multi-threading HTTP proxy
+- without tunnelling(CONNECT) support
+- it works but is very slow. Trying to figure out why
+- have a plan for proxy caching support
 
 ### ICMP ping program
 
