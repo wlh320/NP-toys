@@ -39,6 +39,12 @@ I refactor the code and add features I want based on the assignments provided by
 
 ### ICMP ping program
 
+- a simple ICMP pinger
+- output like real ping command
+- must have root permission to run because of `socket.SOC_RAW`
+
+### ICMP traceroute program
+
 TODO
 
 ### RTP/RTSP server
