@@ -45,7 +45,7 @@ I refactor the code and add features I want based on the assignments provided by
 
 ### ICMP traceroute program
 
-TODO
+- a simple ICMP traceroute program
 
 ### RTP/RTSP server
 
