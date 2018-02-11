@@ -43,9 +43,10 @@ I refactor the code and add features I want based on the assignments provided by
 - output like real ping command
 - must have root permission to run because of `socket.SOC_RAW`
 
-### ICMP traceroute program
+### traceroute program
 
 - a simple ICMP traceroute program
+- both ICMP request and UDP request support
 
 ### RTP/RTSP server
 
